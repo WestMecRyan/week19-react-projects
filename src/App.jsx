@@ -1,5 +1,7 @@
+import Modal from "./components/Modal.jsx";
+
 function App() {
-  return <h1>Hello World</h1>;
+  return <Modal></Modal>;
 }
 
 export default App;
