@@ -1,0 +1,28 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  background-color: lightblue;
+  border-radius: 10%;
+  opacity: 0;
+  /* set default scale to 0.7 then transition to scale of 1 over 0.8 s use a comma after first transition for second transition */
+  scale: 0.7;
+  transition: opacity 1s ease, scale 0.8s ease;
+  width: 50%;
+  height: 50%;
+}
+.modal[open] {
+  opacity: 1;
+  scale: 1;
+}
+.modal:not([open]) {
+  visibility: hidden;
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal[open]::backdrop {
+  opacity: 1;
+}
