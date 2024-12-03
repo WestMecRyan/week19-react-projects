@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialog Modal</title>
+    <style>
+      .my-modal {
+        opacity: 0;
+        background-color: lightblue;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        /* add a scale transform transition from 0.7 to 1 you can separate transitions with commas */
+        transform: scale(0.7);
+        transition: opacity 0.5s ease-in-out, transform 1s ease;
+      }
+      .my-modal[open] {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .my-modal:not([open]) {
+        visibility: hidden;
+      }
+      .my-modal::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+      }
+      .my-modal[open]::backdrop {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <button data-open-modal class="btn">open modal</button>
+    <dialog class="my-modal">
+      <p>My Modal</p>
+      <button data-close-modal class="btn">close modal</button>
+    </dialog>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.querySelector("dialog");
+        const openButton = document.querySelector("[data-open-modal]");
+        const closeButton = document.querySelector("[data-close-modal]");
+        openButton.addEventListener("click", () => {
+          modal.showModal();
+        });
+        closeButton.addEventListener("click", () => {
+          modal.close();
+        });
+        modal.addEventListener("click", (e) => {
+          const dialogDimensions = modal.getBoundingClientRect();
+          if (
+            // the e.clientX is less than the dialogDimensions.left
+            e.clientX < dialogDimensions.left ||
+            // OR
+            // the e.clientX is greater than the dialogDimensions.right
+            e.clientX > dialogDimensions.right ||
+            // OR
+            // the e.clientY is less than the dialogDimensions.top
+            e.clientY < dialogDimensions.top ||
+            // OR
+            // the e.clientY is greater than the dialogDimensions.bottom
+            e.clientY > dialogDimensions.bottom
+          ) {
+            modal.close();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

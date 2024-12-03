@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialog Example</title>
+    <style>
+      .modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        background-color: lightblue;
+        border-radius: 10%;
+        opacity: 0;
+        /* set default scale to 0.7 then transition to scale of 1 over 0.8 s use a comma after first transition for second transition */
+        scale: 0.7;
+        transition: opacity 1s ease, scale 0.8s ease;
+        width: 50%;
+        height: 50%;
+      }
+      .modal[open] {
+        opacity: 1;
+        scale: 1;
+      }
+      .modal:not([open]) {
+        visibility: hidden;
+      }
+      .modal::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .modal[open]::backdrop {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn" data-open-modal>open modal</button>
+    <dialog data-modal class="modal">
+      <div>
+        <p>My Modal</p>
+        <button class="btn" data-close-modal>close modal</button>
+      </div>
+    </dialog>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.querySelector("[data-modal]");
+        const openButton = document.querySelector("[data-open-modal]");
+        const closeButton = document.querySelector("[data-close-modal]");
+        openButton.addEventListener("click", () => {
+          modal.showModal();
+        });
+        closeButton.addEventListener("click", () => {
+          modal.close();
+        });
+        modal.addEventListener("click", (e) => {
+          const modalBoundary = modal.getBoundingClientRect();
+          if (
+            // the e.clientX is less than the modalBoundary.left
+            // OR
+            e.clientX < modalBoundary.left ||
+            // the e.clientX is greater than the modalBoundary.right
+            // OR
+            e.clientX > modalBoundary.right ||
+            // the e.clientY is less than the modalBoundary.top
+            // OR
+            e.clientY < modalBoundary.top ||
+            // the e.clientY is greater than the modalBoundary.botom
+            e.clientY > modalBoundary.bottom
+          ) {
+            modal.close();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compartment dialog</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .parent {
+        width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .parent div {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        /* width: 100%; */
+        height: 20vh;
+        background-color: lightblue;
+        border: 1px dashed gray;
+      }
+      .modal {
+        position: absolute;
+        margin: auto;
+        width: 80%;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: lightblue;
+      }
+      div#modal-parent {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div id="modal-parent">
+        <button data-open-modal class="btn">open modal</button>
+        <dialog data-modal class="modal">
+          <p>my modal</p>
+          <button data-close-modal class="btn">close modal</button>
+        </dialog>
+      </div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.querySelector("[data-modal]");
+        const openButton = document.querySelector("[data-open-modal]");
+        const closeButton = document.querySelector("[data-close-modal]");
+        openButton.addEventListener("click", () => {
+          modal.show();
+        });
+        closeButton.addEventListener("click", () => {
+          modal.close();
+        });
+      });
+    </script>
+  </body>
+</html>
