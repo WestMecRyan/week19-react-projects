@@ -1,7 +1,21 @@
+// src/App.jsx
 import Modal from "./components/Modal.jsx";
+import "./App.css";
 
-function App() {
-  return <Modal></Modal>;
+export default function App() {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  function openModal() {
+    setModalOpen(true);
+  }
+  function closeModal() {
+    setModalOpen(false);
+  }
+  return (
+    <>
+      {" "}
+      <button data-open-modal>open modal</button>
+      <Modal></Modal>
+    </>
+  );
 }
-
-export default App;

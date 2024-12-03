@@ -26,7 +26,7 @@ export default function Modal({ isOpen, onClose, children }) {
       document.addEventListener("click", handleClickOutside);
     }
     return () => {
-      decodeURIComponent.removeListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen, onClose]);
   function handleContentClick(e) {
