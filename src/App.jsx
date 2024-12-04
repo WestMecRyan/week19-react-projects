@@ -1,25 +1,20 @@
 // src/App.jsx
 import "./App.css";
-import { useState } from "react";
-import Modal from "./components/Modal";
-export default function App() {
-  const [isModalOpen, setModalOpen] = useState(false);
-  // create a openModal function that sets the modal state to true
-  function openModal() {
-    setModalOpen(true);
-  }
-  // create a closeModal function that sets the state to false
-  function closeModal() {
-    setModalOpen(false);
-  }
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Admin from "./pages/Admin";
+import Groceries from "./pages/Groceries";
+import Home from "./pages/Home";
 
-  // pass closeModal as a prop called onClose
+export default function App() {
   return (
-    <>
-      <button onClick={openModal}>open modal</button>
-      <Modal onClose={closeModal} isOpen={isModalOpen}>
-        Some content from app
-      </Modal>
-    </>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/groceries" element={<Groceries />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+      </Routes>
+    </Router>
   );
 }
