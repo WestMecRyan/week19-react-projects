@@ -1,0 +1,66 @@
+import React, { useState, useEffect } from 'react';
+
+const QuizGame = () => {
+  const [score, setScore] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState("");
+  const [answers, setAnswers] = useState([]);
+  const [showResult, setShowResult] = useState(false);
+
+  const questions = [
+    {
+      question: "What do we call passing data down through components?",
+      answers: ["Prop Drilling", "State Flow", "Data Pass", "Component Chain", "Props Push", "Data Flow"],
+      correct: "Prop Drilling"
+    },
+    {
+      question: "What hook manages side effects?",
+      answers: ["useEffect", "useState", "useRef", "useMemo", "useCallback", "useReducer"],
+      correct: "useEffect"
+    },
+    {
+      question: "What manages global state in React?",
+      answers: ["Context", "Props", "State", "Effects", "Refs", "Components"],
+      correct: "Context"
+    }
+  ];
+
+  useEffect(() => {
+    newQuestion();
+  }, []);
+
+  const newQuestion = () => {
+    const randomQ = questions[Math.floor(Math.random() * questions.length)];
+    setCurrentQuestion(randomQ.question);
+    setAnswers(randomQ.answers);
+    setShowResult(false);
+  };
+
+  const handleAnswer = (answer) => {
+    const correct = questions.find(q => q.question === currentQuestion).correct === answer;
+    if (correct) {
+      setScore(score + 1);
+    }
+    setShowResult(true);
+    setTimeout(newQuestion, 1500);
+  };
+
+  return (
+    <div className="p-4 max-w-2xl mx-auto">
+      <div className="text-2xl mb-4 text-center">Score: {score}</div>
+      <div className="text-xl mb-6 text-center">{currentQuestion}</div>
+      <div className="grid grid-cols-2 gap-4">
+        {answers.map((answer, index) => (
+          <button
+            key={index}
+            onClick={() => handleAnswer(answer)}
+            className="p-4 text-lg bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+          >
+            {answer}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default QuizGame;
