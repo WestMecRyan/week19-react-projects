@@ -1,11 +1,10 @@
 // src/App.jsx
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Admin from "./pages/Admin";
-import Groceries from "./pages/Groceries";
+import "./App.css";
 import Home from "./pages/Home";
-
+import Groceries from "./pages/Groceries";
+import Admin from "./pages/Admin";
+import Navbar from "./components/Navbar";
 export default function App() {
   return (
     <Router>
