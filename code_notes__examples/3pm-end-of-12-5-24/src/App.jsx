@@ -6,15 +6,12 @@ import Groceries from "./pages/Groceries";
 import Admin from "./pages/Admin";
 import "./App.css";
 export default function App() {
-  function doSomething() {
-    // do something
-  }
   return (
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/groceries" element={<Groceries appDoSomething={doSomething} />} />
+        <Route path="/groceries" element={<Groceries />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>

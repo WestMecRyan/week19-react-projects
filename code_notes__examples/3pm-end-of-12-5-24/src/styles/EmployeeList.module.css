@@ -1,7 +1,6 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  background-color: lightcoral;
 }
 
 .item {
