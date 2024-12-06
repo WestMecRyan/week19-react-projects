@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import GroceryList from "../components/GroceryList";
 import axios from "axios";
 
-export default function Groceries({appDoSomething}) {
+export default function Groceries() {
   const [groceries, setGroceries] = useState([]);
   useEffect(() => {
     async function fetchGroceries() {
@@ -28,8 +28,7 @@ export default function Groceries({appDoSomething}) {
   return (
     <div>
       <h1>Groceries</h1>
-      <GroceryList />
-      <button onClick={appDoSomething}></button>
+      <GroceryList items={groceries} />
     </div>
   );
 }

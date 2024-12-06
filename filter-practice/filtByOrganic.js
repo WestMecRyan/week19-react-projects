@@ -2,3 +2,7 @@
 function filtByOrganic(items) {
     return items.filter(i=>i.organic);
 }
+
+function filtByNonOrganic(items) {
+    return items.filter(i=>!i.organic);
+}
